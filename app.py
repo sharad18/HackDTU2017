@@ -7,18 +7,15 @@ from flask import Flask, request
 app = Flask(__name__)
 
 page_token = "EAAFE2AB12bUBAEdWAU672nnZCqZBmRT2ZAdk8WhWDy7X5YR9rFlVcYtX4uyQsLi9Kv6NyLRfQo3ZAlUkCD2Nl0dFKZBQKEIchUfRWbwoiEFTaPCJs2fMWMnOiEtlW8eN9fkgz8Y14OZAHpTqLN0UfZB2hPJjkIO5jZCWPNzOPh8XTgZDZD"
-verify_token = ' 2318934571'
+verify_token = '2318934571'
 PAGE_ACCESS_TOKEN = page_token
 
 @app.route('/webhook', methods = ['GET'])
 def verify():
-    print ("Handling Verification")
-    if request.args.get('hub.verify_token', '') == verify_token:
-        print ("Verification successful!")
-        return request.args.get('hub.challenge','')
-    else:
-        print ("Verification failed!")
-        return 'Error, wrong validation token'
+     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
+        if not request.args.get("hub.verify_token") == verify_token:
+            return "Verification token mismatch", 403
+        return request.args["hub.challenge"], 200
         #if not request.args.get("hub.verify_token") == verify_token:
         #   return "Verification token mismatch", 403
         #return request.args["hub.challenge"], 200
