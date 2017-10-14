@@ -29,11 +29,10 @@ def logg(mess, meta='log', symbol='#'):
     #pass
     print ('%s\n%s\n%s'%(symbol*20,mess,symbol*20))
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/', methods=['POST'])
 def webhook():
 
     # endpoint for processing incoming messaging events
-    #set_persistent_menu()
 
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
@@ -43,14 +42,11 @@ def webhook():
         for entry in data["entry"]:
             for messaging_event in entry["messaging"]:
 
-                #print messaging_event
-
                 if messaging_event.get("message"):  # someone sent us a message
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
-                    print (sender_id)
 
                     send_message(sender_id, "roger that!")
 
@@ -61,10 +57,7 @@ def webhook():
                     pass
 
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
-                    print ("postback detected")
-                    sender_id = messaging_event["sender"]["id"] 
-                    handle_postback(sender_id,messaging_event['postback']['payload'])
-
+                    pass
     return "ok", 200
 def send_message(recipient_id, message_text):
     log("sending message to {recipient}: {text}".format(recipient = recipient_id, text = message_text))
