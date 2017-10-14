@@ -82,7 +82,7 @@ def set_persistant_menu():
 		"setting_type": "call_to_actions",
 		"thread_state": "existing_thread",
 		"locale":"default",
-		"composer_input_disabled":true,
+		"composer_input_disabled":false,
 		"call_to_actions":[
 			{
 				"type":"postback",
@@ -103,8 +103,8 @@ def set_persistant_menu():
 		]
 }
 	menu_object = json.dumps(menu_object)
-	status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=menu_object)
-	logg(status.json(), symbol='----**----')
+    status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=menu_object)
+    logg(status.json(),symbol='---**---')
 	pprint(status.json())
 
 def handle_postback(fbid, payload):
