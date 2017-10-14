@@ -171,7 +171,7 @@ def handle_postback(fbid, payload):
 	}
 }
 	elif payload == "DOCC":
-		response_object{
+		response_object = {
 			"recipient":{
 			"id":fbid
 			},
