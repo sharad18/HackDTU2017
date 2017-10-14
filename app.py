@@ -14,10 +14,10 @@ PAGE_ACCESS_TOKEN = page_token
 def verify():
 	print "Handling Verification"
 	if request.args.get('hub.verify_token', '') == verify_token:
-		print "Verification successful!"
+		print ("Verification successful!")
 		return request.args.get('hub.challenge','')
 	else:
-		print "Verification failed!"
+		print ("Verification failed!")
 		return 'Error, wrong validation token'
 		#if not request.args.get("hub.verify_token") == verify_token:
 		#	return "Verification token mismatch", 403
