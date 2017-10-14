@@ -10,31 +10,49 @@ page_token = "EAAFE2AB12bUBAEdWAU672nnZCqZBmRT2ZAdk8WhWDy7X5YR9rFlVcYtX4uyQsLi9K
 verify_token = '    '
 PAGE_ACCESS_TOKEN = page_token
 
-@app.route('/webhook', methods = ['GET'])
-def verify():
-    print ("Handling Verification")
-    if request.args.get('hub.verify_token', '') == verify_token:
-        print ("Verification successful!")
-        return request.args.get('hub.challenge','')
-    else:
-        print ("Verification failed!")
-        return 'Error, wrong validation token'
-        #if not request.args.get("hub.verify_token") == verify_token:
-        #   return "Verification token mismatch", 403
-        #return request.args["hub.challenge"], 200
+@app.route('/webhook', methods=['POST'])
+def webhook():
 
-    #return verify_token, 200
+    # endpoint for processing incoming messaging events
+    #set_persistent_menu()
 
-def logg(mess, meta='log', symbol='#'):
-    #pass
-    print ('%s\n%s\n%s'%(symbol*20,mess,symbol*20))
+    data = request.get_json()
+    log(data)  # you may not want to log every incoming message in production, but it's good for testing
 
+    if data["object"] == "page":
+
+        for entry in data["entry"]:
+            for messaging_event in entry["messaging"]:
+
+                #print messaging_event
+
+                if messaging_event.get("message"):  # someone sent us a message
+
+                    sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+                    recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+                    message_text = messaging_event["message"]["text"]  # the message's text
+                    print sender_id
+
+                    send_message(sender_id, "roger that!")
+
+                if messaging_event.get("delivery"):  # delivery confirmation
+                    pass
+
+                if messaging_event.get("optin"):  # optin confirmation
+                    pass
+
+                if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
+                    print "postback detected"
+                    sender_id = messaging_event["sender"]["id"] 
+                    handle_postback(sender_id,messaging_event['postback']['payload'])
+
+    return "ok", 200
 @app.route('/webhook', methods=['POST'])
 def webhook():
     data = request.get_json()
     log(data)
     if data['object'] =="page":
-        for entry in data["entry"]:
+        for entry in data["entry"]: 
             for messaging_event in entry["messaging"]:
                 print ('&&&&&&&&&&&&&&&&&&&&&&77', messaging_event)
                 if messaging_event.get("message"):
