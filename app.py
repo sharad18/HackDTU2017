@@ -20,8 +20,8 @@ def verify():
 	return "Hello world", 200
 
 def logg(mess, meta='log', symbol='#'):
-	pass
-#	print '%s\n%s\n%s'%(symbol*20,mess,symbol*20)
+	#pass
+	print ('%s\n%s\n%s'%(symbol*20,mess,symbol*20))
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -34,7 +34,7 @@ def webhook():
 					sender_id = messaging_event["sender"]["id"]
 					recipient_id = messaging_event["recipient"]["id"]
 					message_text = messaging_event["message"]["text"]
-					print sender_id
+					print (sender_id)
 					send_message(sender_id, "roger that!")
 
 				if messaging_event.get("delivery"):
@@ -267,7 +267,7 @@ def handle_postback(fbid, payload):
 	return
 
 def log(message):
-	print str(message)
+	print (str(message))
 	sys.stdout.flush()
 
 if __name__ == '__main__':
