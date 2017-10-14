@@ -20,7 +20,7 @@ def verify():
 	return "Hello world", 200
 
 def logg(mess, meta='log', symbol='#'):
-	print '%s\n%s\n%s'%(symbol*20, mess, symbol*20)
+	print '%s\n%s\n%s'%(symbol*20,mess,symbol*20)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
