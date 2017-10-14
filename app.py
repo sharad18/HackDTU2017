@@ -176,8 +176,8 @@ def handle_postback(fbid, payload):
 		}
 	} 
 }
-		send_message(response_object)
-		
+		#send_message(response_object)
+
 	elif payload == "DOCC":
 		response_object = {
 			"recipient":{
