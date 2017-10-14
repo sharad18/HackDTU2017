@@ -12,7 +12,7 @@ PAGE_ACCESS_TOKEN = page_token
 
 @app.route('/webhook', methods = ['GET'])
 def verify():
-	print "Handling Verification"
+	print ("Handling Verification")
 	if request.args.get('hub.verify_token', '') == verify_token:
 		print ("Verification successful!")
 		return request.args.get('hub.challenge','')
