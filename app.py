@@ -160,7 +160,7 @@ def handle_postback(fbid, payload):
 							{
 								"type":"web_url",
 								"url": ''
-								"title":'Liver Cancer Prediction'
+								"title":"Liver Cancer Prediction"
 
 							}
 						]
