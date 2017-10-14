@@ -94,10 +94,10 @@ def set_persistant_menu():
 
 		]
 }
-menu_object = json.dumps(menu_object)
-status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=menu_object)
-logg(status.json(), symbol='----**----')
-pprint(status.json())
+	menu_object = json.dumps(menu_object)
+	status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=menu_object)
+	logg(status.json(), symbol='----**----')
+	pprint(status.json())
 
 def handle_postback(fbid, payload):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?acess_token=%s'%PAGE_ACCESS_TOKEN
