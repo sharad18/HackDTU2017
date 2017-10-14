@@ -42,7 +42,7 @@ def webhook():
 				if messaging_event.get("optin"):
 					pass
 				if messaging_event.get("postback"):
-					print "postback detected"
+					print ("postback detected")
 					sender_id = messaging_event["sender"]["id"]
 					handle_postback(sender_id, messaging_event['postback']['payload'])
 	return "ok", 200
