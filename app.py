@@ -41,6 +41,7 @@ def webhook():
 
         for entry in data["entry"]:
             for messaging_event in entry["messaging"]:
+                print ("******", messaging_event, "***********")
 
                 if messaging_event.get("message"):  # someone sent us a message
 
