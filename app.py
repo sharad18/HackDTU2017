@@ -105,7 +105,7 @@ def handle_postback(fbid, payload):
 	response_text = ''
 	response_object = ''
 
-	if payload = 'MENT':
+	if payload == 'MENT':
 		response_object = {
 			"recipient":{
 				"id":fbid
