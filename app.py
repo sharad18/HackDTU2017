@@ -251,7 +251,7 @@ def handle_postback(fbid, payload):
 	elif payload == 'DONA':
 		response_text = "Follow this link to give financial help to those in need https://1mp.me/donate"
 
-	if response_text:s
+	if response_text:
 		if response_object:
 			response_object1 = json.dumps({"recipient":{"id":fbid}, "message":{"text":response_text}})
 			response_object2 = json.dumps(response_object)
